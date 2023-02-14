@@ -11,18 +11,14 @@ To get started, you'll need to have Python 3.7 or later installed on your machin
 ```
 pip install fastapi
 pip install uvicorn
-pip install numpy
-pip install pandas
 ```
 
 ## Creating a FastAPI Model
 
-Let's create a simple linear regression model using FastAPI.
+Let's create a simple model using FastAPI.
 
 ```
 from fastapi import FastAPI
-import numpy as np
-import pandas as pd
 
 
 app = FastAPI()
@@ -31,19 +27,9 @@ app = FastAPI()
 async def root():
     return {"message": "Hello, World"}
 
-@app.post("/predict")
-async def predict(x: float, y: float):
-    # Creating a sample data
-    data = {"x": [x], "y": [y]}
-    df = pd.DataFrame(data)
-    
-    # Calculating the regression coefficients
-    b = np.cov(df["x"], df["y"])[0, 1] / np.var(df["x"])
-    a = df["y"].mean() - b * df["x"].mean()
-    
-    # Predicting the result
-    result = a + b * x
-    return {"prediction": result}
+@app.post("/compute")
+def compute(x: float, y: float):
+    return {"result": x + y}
 ```
 
 ## Running the FastAPI Model
@@ -54,10 +40,10 @@ You can run the FastAPI model using the following command:
 uvicorn main:app --reload
 ```
 
-You should now be able to make predictions using the /predict endpoint by sending a POST request with the parameters x and y.
+You should now be able to make predictions using the /compute endpoint by sending a POST request with the parameters x and y.
 
 ## Conclusion
 
 This is a simple example of how you can create and deploy a FastAPI model on the Health Universe platform. You can use this sample implementation as a starting point for your own projects and customize it to your specific needs.
 
-We hope this helps and we look forward to seeing your contributions to the Health Universe platform.
+We hope this helps and we look forward to seeing your contributions to the Health Universe platform!
