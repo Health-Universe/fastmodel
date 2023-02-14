@@ -10,9 +10,9 @@ To get started, you'll need to have Python 3.7 or later installed on your machin
 
 ```
 pip install fastapi
+pip install uvicorn
 pip install numpy
 pip install pandas
-pip install uvicorn
 ```
 
 ## Creating a FastAPI Model
